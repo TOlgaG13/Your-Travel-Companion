@@ -8,24 +8,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailServiceImpl implements EmailService{
     private final JavaMailSender emailSender;
-    private final ApplicationContext applicationContext;
+    private final SimpleMailMessage template;
 
-
-    public EmailServiceImpl(JavaMailSender emailSender, ApplicationContext applicationContext) {
+    public EmailServiceImpl(JavaMailSender emailSender, SimpleMailMessage template) {
         this.emailSender = emailSender;
-        this.applicationContext = applicationContext;
+        this.template = template;
     }
 
+    @Override
     public void sendMessage(String to, String code) {
-        SimpleMailMessage message = applicationContext.getBean(SimpleMailMessage.class);
 
-        System.out.println(to);
-        message.setText(code);
+        SimpleMailMessage message = new SimpleMailMessage(template);
         message.setTo(to);
+        message.setText(code);
+
         System.out.println("Email will be sent to: " + to);
         System.out.println("With code: " + code);
         System.out.println("From address: " + message.getFrom());
+
         emailSender.send(message);
     }
-
 }
