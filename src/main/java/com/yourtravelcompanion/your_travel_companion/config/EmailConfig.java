@@ -15,7 +15,7 @@ import java.util.Properties;
 @EnableScheduling
 
 public class EmailConfig {
-    @Value("${spring.mail.username}")
+    @Value("${MAIL_USERNAME}")
     private String fromAddress;
 
 
@@ -31,8 +31,8 @@ public class EmailConfig {
         return message;
     }
     @Bean
-    public JavaMailSender javaMailSender(@Value("${spring.mail.username}") String username,
-                                         @Value("${spring.mail.password}") String password) {
+    public JavaMailSender javaMailSender(@Value("${MAIL_USERNAME}") String username,
+                                         @Value("${MAIL_PASSWORD}") String password) {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
