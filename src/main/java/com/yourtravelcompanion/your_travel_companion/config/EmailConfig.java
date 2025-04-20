@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
 @EnableScheduling
-@PropertySource("classpath:application.properties")
+
 public class EmailConfig {
     @Value("${spring.mail.username}")
     private String fromAddress;
