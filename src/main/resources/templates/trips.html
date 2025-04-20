@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Поїздки</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body th:replace="layout :: layoutContent">
+
+<div th:fragment="content">
+  <div class="glass-box">
+    <h2>Доступні поїздки</h2>
+
+    <!-- Форма пошуку -->
+    <form th:action="@{/trips/search}" method="get" class="input-box">
+      <input type="text" name="destination" placeholder="Пункт призначення">
+      <input type="text" name="country" placeholder="Країна">
+      <input type="date" name="startDate">
+      <input type="date" name="endDate">
+      <button class="btn" type="submit">Пошук</button>
+    </form>
+
+    <!-- Список поїздок -->
+    <ul class="trip-list">
+      <li th:each="trip : ${trips}" style="margin-bottom: 15px;">
+        <a th:href="@{'/trips/' + ${trip.id}}" style="font-weight: bold;">
+          <span th:text="${trip.destination}"></span>
+        </a>
+        <span style="display: block; font-size: 14px;">
+          <span th:text="${trip.startDate}"></span> – <span th:text="${trip.endDate}"></span>
+        </span>
+      </li>
+    </ul>
+
+    <!-- Посилання -->
+    <div class="links" style="text-align: center; margin-top: 20px;">
+      <a href="/trips/create" class="btn">+ Створити нову поїздку</a>
+      <a href="/account" class="btn" style="margin-left: 10px;">← Назад до профілю</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Створити поїздку</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body th:replace="layout :: layoutContent">
+
+<div th:fragment="content">
+  <div class="glass-box">
+    <h2>Створити нову поїздку</h2>
+
+    <form th:action="@{/trips/create}" th:object="${trip}" method="post">
+      <div class="input-box">
+        <label>Пункт призначення:<span class="required-star">*</span></label>
+        <input type="text" th:field="*{destination}" required>
+      </div>
+
+      <div class="input-box">
+        <label>Дата початку:<span class="required-star">*</span></label>
+        <input type="date" th:field="*{startDate}" required>
+      </div>
+
+      <div class="input-box">
+        <label>Дата кінця:<span class="required-star">*</span></label>
+        <input type="date" th:field="*{endDate}" required>
+      </div>
+
+      <div class="input-box">
+        <label>Опис:<span class="required-star">*</span></label>
+        <textarea th:field="*{description}"></textarea>
+      </div>
+
+      <div class="input-box">
+        <label>Країна:<span class="required-star">*</span></label>
+        <select th:field="*{countryId}" required>
+          <option value="" th:if="${trip.countryId == null}" disabled selected>Select a country</option>
+          <option th:each="country : ${countries}"
+                  th:value="${country.id}"
+                  th:text="${country.name}">
+          </option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn">Створити</button>
+      <a href="/account" class="btn" style="margin-left: 10px;">← Назад до профілю</a>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+

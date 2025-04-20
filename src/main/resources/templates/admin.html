@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Адмін-панель</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="main-container">
+
+  <div class="glass-box">
+    <h1>Адмін-панель</h1>
+  </div>
+
+  <!-- Юсери -->
+  <div class="glass-box">
+    <h2>Користувачі</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Логін</th>
+        <th>Пароль</th>
+        <th>Заблокований</th>
+        <th>Роль</th>
+        <th>Дії</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.login}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.blocked ? 'Так' : 'Ні'}"></td>
+        <td th:text="${user.role}"></td>
+        <td>
+          <div th:if="${user.email != #authentication.name}" class="admin-actions">
+            <form th:action="@{/admin/toggle}" method="post">
+              <input type="hidden" name="userId" th:value="${user.id}" />
+              <button type="submit" class="btn" th:text="${user.blocked ? 'Розблокувати' : 'Заблокувати'}"></button>
+            </form>
+            <form th:action="@{/admin/delete-user/{id}(id=${user.id})}" method="post">
+              <button type="submit" class="btn delete">Видалити</button>
+            </form>
+          </div>
+          <span th:if="${user.email == #authentication.name}" style="color: gray;">
+            Немає дій (це ви)
+          </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Поїздки -->
+  <div class="glass-box">
+    <h2>Поїздки</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Назва</th>
+        <th>Опис</th>
+        <th>Автор</th>
+        <th>Дії</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="trip : ${trips}">
+        <td th:text="${trip.id}"></td>
+        <td th:text="${trip.destination}"></td>
+        <td th:text="${trip.description}"></td>
+        <td th:text="${trip.user.login}"></td>
+        <td>
+          <form th:action="@{/admin/delete-trip/{id}(id=${trip.id})}" method="post">
+            <button type="submit" class="btn delete">Видалити</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="/logout" class="btn">Вийти</a>
+    <a href="/account" class="btn" style="margin-left: 10px;">← Назад до профілю</a>
+  </div>
+
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+

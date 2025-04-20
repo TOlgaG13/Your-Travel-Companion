@@ -1,0 +1,53 @@
+# Spring Boot
+target/
+*.jar
+*.war
+
+# Maven
+!.mvn/wrapper/maven-wrapper.jar
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
+
+# Logs
+logs/
+*.log
+hs_err_pid*
+
+# Application config (не комітимо файли з паролями!)
+application.properties
+application.yml
+.env
+
+# IDE files
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# Lombok
+lombok.config
+
+

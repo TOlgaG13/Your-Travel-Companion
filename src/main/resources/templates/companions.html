@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Мої заявки на поїздки</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body th:replace="layout :: layoutContent">
+
+<div th:fragment="content">
+  <div class="glass-box">
+    <h2>Мої заявки на поїздки</h2>
+
+    <ul>
+      <li th:each="companion : ${companions}" style="margin-bottom: 20px;">
+        <p><strong>Trip to:</strong> <span th:text="${companion.trip.destination}"></span></p>
+        <p><strong>Status:</strong> <span th:text="${companion.status}"></span></p>
+        <p><strong>Applied at:</strong>
+          <span th:text="${#temporals.format(companion.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+        </p>
+        <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.2);">
+      </li>
+    </ul>
+
+    <p style="text-align: center;"><a href="/account" class="btn">Назад до профілю</a></p>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+

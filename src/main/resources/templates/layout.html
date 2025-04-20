@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Travel Companion</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="glass-box" style="display: flex; gap: 20px; justify-content: center; padding: 10px;">
+        <a href="/">Home</a>
+        <a href="/account">Profile</a>
+        <a href="/trips">Trips</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<main class="main-container">
+    <div class="glass-box" th:fragment="layoutContent">
+        <div th:insert="~{::content}"></div>
+        <footer style="text-align: center; margin-top: 40px; color: #ffffffb0;">
+            <p>© 2025 Your Travel Companion</p>
+        </footer>
+    </div>
+</main>
+
+</body>
+</html>
+
+
+
+

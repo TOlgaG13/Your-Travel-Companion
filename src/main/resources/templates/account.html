@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Мій профіль</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="main-container">
+  <div th:if="${message}" class="alert-success" th:text="${message}"></div>
+
+  <div class="glass-box">
+    <h2>Мій профіль</h2>
+    <p><strong>Логін:</strong> <span th:text="${user.login}"></span></p>
+    <p><strong>Пошта:</strong> <span th:text="${user.email}"></span></p>
+    <p><strong>Телефон:</strong> <span th:text="${user.phone}"></span></p>
+    <p><strong>Адрес:</strong> <span th:text="${user.address}"></span></p>
+    <a href="/account/edit" class="btn">Редагувати профіль</a>
+  </div>
+
+  <div class="glass-box">
+    <h3>Мої поїздки</h3>
+    <ul>
+      <li th:each="trip : ${createdTrips}">
+        <strong th:text="${trip.destination}"></strong>
+        (from <span th:text="${trip.startDate}"></span> to <span th:text="${trip.endDate}"></span>)
+        <ul>
+          <li th:each="companion : ${trip.companions}">
+            <span th:text="${companion.user.login}"></span>
+            <span th:if="${companion.user.id == user.id}">
+              – Ви приєдналися до цієї поїздки
+
+            </span>
+            <span th:if="${companion.user.id != user.id}">
+              – До вас приєднався новий компаньйон
+            </span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="glass-box" sec:authorize="hasRole('ADMIN')" style="background: rgba(248, 234, 234, 0.85);">
+    <h3 style="color: darkred;">Розширені можливості адміністратора</h3>
+    <a href="/admin" class="btn">Перейти до адмін-панелі</a>
+  </div>
+
+  <div class="glass-box">
+    <h3>Поїздка до якої я приєднався</h3>
+    <ul>
+      <li th:each="trip : ${companionTrips}">
+        <strong th:text="${trip.destination}"></strong>
+        (<span th:text="${trip.startDate}"></span> - <span th:text="${trip.endDate}"></span>)
+        <ul>
+          <li>Ви приєднались до цієї поїздки</li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="/trips" class="btn-nav">Знайти поїздку</a>
+    <a href="/logout" class="btn-nav">Вийти</a>
+
+  </div>
+
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

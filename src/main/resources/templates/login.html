@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Логін</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body th:replace="layout :: layoutContent">
+
+<div th:fragment="content">
+  <div class="glass-box">
+    <h2>Login</h2>
+
+    <form th:action="@{/login}" method="post">
+      <div class="input-box">
+        <label>Пошта: <span class="required-star">*</span></label>
+        <input type="email" name="username" required>
+      </div>
+      <div class="input-box">
+        <label>Пароль: <span class="required-star">*</span></label>
+        <input type="password" name="password" required>
+      </div>
+      <button type="submit" class="btn">Вхід</button>
+    </form>
+
+    <div th:if="${param.blocked}" class="error">Ваш акаунт заблоковано.</div>
+    <div th:if="${param.error}" class="error">Невірний логін або пароль.</div>
+    <div th:if="${param.logout}" class="success">Ви успішно вийшли з акаунту.</div>
+
+
+    <p style="margin-top: 20px;"><a href="/register">Зареєструватись</a></p>
+    <p>Або увійти через:</p>
+    <a href="/oauth2/authorization/google" class="btn full-width">Увійти через Google</a>
+
+
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
