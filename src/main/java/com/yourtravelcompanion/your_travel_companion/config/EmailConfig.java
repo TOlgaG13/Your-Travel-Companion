@@ -3,7 +3,7 @@ package com.yourtravelcompanion.your_travel_companion.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
