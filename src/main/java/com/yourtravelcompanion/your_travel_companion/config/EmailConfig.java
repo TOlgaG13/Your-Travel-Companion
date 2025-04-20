@@ -11,8 +11,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 
 public class EmailConfig {
-    @Value("${spring.mail.username}")
-    private String fromAddress;
+    private final String fromAddress = "olgapracticeprofile@gmail.com";
+
 
     @Bean
     public SimpleMailMessage messageTemplate() {
