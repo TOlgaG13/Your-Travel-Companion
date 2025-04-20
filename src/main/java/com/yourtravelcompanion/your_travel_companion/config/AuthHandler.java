@@ -5,7 +5,6 @@ import com.yourtravelcompanion.your_travel_companion.models.UserRegisterType;
 import com.yourtravelcompanion.your_travel_companion.models.UserRole;
 import com.yourtravelcompanion.your_travel_companion.services.UserDetailsServiceImpl;
 import com.yourtravelcompanion.your_travel_companion.services.UserService;
-import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.boot.CommandLineRunner;
@@ -88,11 +87,7 @@ public class AuthHandler implements AuthenticationSuccessHandler {
             response.sendRedirect(redirectUrl);
         }
     }
-    @PostConstruct
-    public void logGoogleOAuthProps() {
-        System.out.println("CLIENT_ID: " + System.getenv("GOOGLE_CLIENT_ID"));
-        System.out.println("CLIENT_SECRET: " + System.getenv("GOOGLE_CLIENT_SECRET"));
-    }
+
     @Bean
     public CommandLineRunner createAdmin(UserService userService, PasswordEncoder passwordEncoder) {
         return args -> {
