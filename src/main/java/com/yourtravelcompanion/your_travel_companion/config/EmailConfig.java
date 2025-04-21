@@ -15,7 +15,8 @@ import java.util.Properties;
 @EnableScheduling
 
 public class EmailConfig {
-    @Value("${spring.mail.username}")
+    @Value("${MAIL_USERNAME}")
+
     private String fromAddress;
 
 
@@ -23,11 +24,9 @@ public class EmailConfig {
     @Bean
     public SimpleMailMessage messageTemplate() {
         SimpleMailMessage message = new SimpleMailMessage();
-
         message.setSubject("Register code");
         message.setText("Please enter the code into form:\n\n");
-        message.setFrom(fromAddress);
-
+        message.setFrom(System.getenv("MAIL_USERNAME"));
         return message;
     }
 
