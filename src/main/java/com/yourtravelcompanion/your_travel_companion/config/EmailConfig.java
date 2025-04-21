@@ -15,7 +15,7 @@ import java.util.Properties;
 @EnableScheduling
 
 public class EmailConfig {
-    @Value("${MAIL_USERNAME}")
+    @Value("${spring.mail.username}")
     private String fromAddress;
 
 
