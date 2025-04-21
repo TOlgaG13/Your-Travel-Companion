@@ -15,9 +15,7 @@ import java.util.Properties;
 @EnableScheduling
 
 public class EmailConfig {
-    @Value("${MAIL_USERNAME}")
 
-    private String fromAddress;
 
 
 
