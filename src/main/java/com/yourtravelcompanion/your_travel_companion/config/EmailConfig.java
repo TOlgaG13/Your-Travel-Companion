@@ -15,30 +15,19 @@ import java.util.Properties;
 @EnableScheduling
 
 public class EmailConfig {
+    @Value("${MAIL_USERNAME}")
+    private String fromAddress;
 
-    @Bean
-    public JavaMailSender javaMailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-
-        mailSender.setHost("smtp.gmail.com");
-        mailSender.setPort(587);
-        mailSender.setUsername(System.getenv("MAIL_USERNAME"));
-        mailSender.setPassword(System.getenv("MAIL_PASSWORD"));
-
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-
-        return mailSender;
-    }
 
 
     @Bean
     public SimpleMailMessage messageTemplate() {
         SimpleMailMessage message = new SimpleMailMessage();
+
         message.setSubject("Register code");
         message.setText("Please enter the code into form:\n\n");
-        message.setFrom(System.getenv("MAIL_USERNAME"));
+        message.setFrom(fromAddress);
+
         return message;
     }
 
