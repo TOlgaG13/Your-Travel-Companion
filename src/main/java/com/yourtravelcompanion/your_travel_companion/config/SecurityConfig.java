@@ -1,6 +1,5 @@
 package com.yourtravelcompanion.your_travel_companion.config;
 
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.LockedException;
@@ -11,8 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.web.filter.ForwardedHeaderFilter;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -22,12 +19,6 @@ public class SecurityConfig {
     public SecurityConfig(AuthenticationSuccessHandler authenticationSuccessHandler
                         ) {this.authenticationSuccessHandler = authenticationSuccessHandler;
 
-    }
-    @Bean
-    public FilterRegistrationBean<ForwardedHeaderFilter> forwardedHeaderFilter() {
-        FilterRegistrationBean<ForwardedHeaderFilter> filter = new FilterRegistrationBean<>();
-        filter.setFilter(new ForwardedHeaderFilter());
-        return filter;
     }
 
     @Bean
