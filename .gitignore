@@ -17,7 +17,7 @@ logs/
 hs_err_pid*
 
 # Application config (не комітимо файли з паролями!)
-application.properties
+#application.properties
 application.yml
 .env
 
