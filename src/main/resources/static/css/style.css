@@ -1,26 +1,26 @@
 /*Глобальні стилі*/
 body {
-    font-family: 'Segoe UI', sans-serif;
-    line-height: 1.6;
+    font-family: 'Segoe UI', sans-serif;/* шрифт для сайту */
+    line-height: 1.6;/* висота рядка для читання */
     color: #212121;
     background-image: url('/images/river-1866579_1920.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 100vh;
+    min-height: 100vh;/*висота цілого екрану */
     margin: 0;
     padding: 40px 20px;
-    overflow-x: hidden;
+    overflow-x: hidden;/* заборона горизонтального скролу */
 }
 
 /*Щось на кшталт прозорості */
 .glass-box {
     background-color: rgba(240, 240, 240, 0.7);
-    border-radius: 12px;
+    border-radius: 12px;/* округлені кути */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     padding: 30px;
     margin: 30px auto;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);/*розмиття фону */
     -webkit-backdrop-filter: blur(8px);
     max-width: 500px;
 }

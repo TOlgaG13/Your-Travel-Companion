@@ -34,7 +34,7 @@ public class CompanionController {
             return "redirect:/login";
         }
 
-        var user = userService.findByEmail(userDetails.getUsername())
+        CustomUser user = userService.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new IllegalStateException("User not found"));
 
         model.addAttribute("companions", companionService.getCompanionsByUserId(user.getId()));

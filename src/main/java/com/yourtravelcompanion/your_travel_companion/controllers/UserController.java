@@ -172,7 +172,7 @@ public class UserController {
     }
 
 
-    // ---------- ДОПОМОЖНИЙ МЕТОД ----------
+    //доп. мет. для визначеня пот. кор.
 
     private String getEmailFromPrincipal(Object principal) {
         if (principal instanceof UserDetails userDetails) {
