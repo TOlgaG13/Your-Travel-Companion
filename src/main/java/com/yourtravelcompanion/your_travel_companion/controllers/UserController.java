@@ -120,7 +120,7 @@ public class UserController {
         String referrer = request.getHeader("Referer");
         if (referrer != null && !referrer.contains("/login") && !referrer.contains("/logout")) {
             request.getSession().setAttribute("redirect_url", referrer);
-        }
+        }//повертаємо юсера звідки прийшов
         return "login";
     }
 
@@ -172,11 +172,12 @@ public class UserController {
     }
 
 
-    //доп. мет. для визначеня пот. кор.
+    //доп. мет. для визначеня пот. кор.для зчит.емайлу
 
     private String getEmailFromPrincipal(Object principal) {
+        //автор.через форму
         if (principal instanceof UserDetails userDetails) {
-            return userDetails.getUsername();
+            return userDetails.getUsername();//username=email
         } else if (principal instanceof DefaultOidcUser oAuth2User) {
             return (String) oAuth2User.getAttributes().get("email");
         }
