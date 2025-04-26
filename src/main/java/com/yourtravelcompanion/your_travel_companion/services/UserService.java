@@ -129,11 +129,13 @@ private final TripService tripService;
         }
 
         Object principal = authentication.getPrincipal();
-
+        //звич.форма реєст.
         if (principal instanceof UserDetails userDetails) {
             return userDetails.getUsername();
+            //берем напряму емайл
         } else if (principal instanceof OidcUser oidcUser) {
             return oidcUser.getEmail(); // Google OAuth
+            //емаіл з атрибутів(не викор).
         } else if (principal instanceof OAuth2User oauth2User) {
             return (String) oauth2User.getAttribute("email");
         }

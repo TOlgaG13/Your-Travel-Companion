@@ -57,8 +57,8 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout=true")
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
+                        .invalidateHttpSession(true)//очистити сесію,запоб.повт.використ сесії
+                        .deleteCookies("JSESSIONID")//ідентифікує сесію юсера
                         .permitAll()
                 )
                 .requestCache(request -> request.disable())
