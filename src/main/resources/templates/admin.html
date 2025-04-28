@@ -32,7 +32,7 @@
         <td th:text="${user.id}"></td>
         <td th:text="${user.login}"></td>
         <td th:text="${user.email}"></td>
-        <td th:text="${user.blocked ? 'Так' : 'Ні'}"></td>
+        <td th:text="${user.blocked ? 'Yes' : 'No'}"></td>
         <td th:text="${user.role}"></td>
         <td>
           <div th:if="${user.email != #authentication.name}" class="admin-actions">
@@ -83,7 +83,7 @@
   </div>
 
   <div style="text-align: center; margin-top: 20px;">
-    <a href="/logout" class="btn">Вийти</a>
+    <a href="/logout" class="btn">Log out</a>
     <a href="/account" class="btn" style="margin-left: 10px;">← Back to profile</a>
   </div>
 

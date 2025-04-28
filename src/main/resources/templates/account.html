@@ -29,7 +29,7 @@
           <li th:each="companion : ${trip.companions}">
             <span th:text="${companion.user.login}"></span>
             <span th:if="${companion.user.id == user.id}">
-              – You have joined this trip.
+              – You joined this trip.
 
             </span>
             <span th:if="${companion.user.id != user.id}">
