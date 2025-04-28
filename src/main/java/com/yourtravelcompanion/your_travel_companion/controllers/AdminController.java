@@ -34,10 +34,10 @@ public class AdminController {
                                    RedirectAttributes redirectAttributes) {
 
         CustomUser userToToggle = userService.getUserById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("Користувача не знайдено"));
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         if (userToToggle.getEmail().equals(currentUser.getUsername())) {
-            redirectAttributes.addFlashAttribute("error", "Ви не можете заблокувати самого себе.");
+            redirectAttributes.addFlashAttribute("error", "You cannot block yourself.");
             return "redirect:/admin";
         }
 
@@ -65,10 +65,10 @@ public class AdminController {
     @PostMapping("/admin/delete-user/{id}")
     public String deleteUser(@PathVariable Long id, @AuthenticationPrincipal UserDetails currentUser, RedirectAttributes redirectAttributes) {
         CustomUser userToDelete = userService.getUserById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Користувач не знайдений"));
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         if (userToDelete.getEmail().equals(currentUser.getUsername())) {
-            redirectAttributes.addFlashAttribute("error", "Ви не можете видалити самого себе.");
+            redirectAttributes.addFlashAttribute("error", "You cannot block yourself.");
             return "redirect:/admin";
         }
 

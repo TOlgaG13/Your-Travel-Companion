@@ -43,7 +43,7 @@ public class TripService {
         trip.setCreated(LocalDateTime.now());
         trip.setUser(user);
         Country country = countryRepository.findById(tripDto.getCountryId())
-                .orElseThrow(() -> new IllegalStateException("Країна не знайдена"));
+                .orElseThrow(() -> new IllegalStateException("Country not found"));
         trip.setCountry(country);
 
         tripRepository.save(trip);
@@ -64,7 +64,7 @@ public class TripService {
             trip.setDescription(updatedTrip.getDescription());
             trip.setCountry(
                     countryRepository.findById(updatedTrip.getCountryId())
-                            .orElseThrow(() -> new IllegalStateException("Країна не знайдена"))
+                            .orElseThrow(() -> new IllegalStateException("Country not found"))
             );
             tripRepository.save(trip);
         });

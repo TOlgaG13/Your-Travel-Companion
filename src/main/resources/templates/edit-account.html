@@ -2,31 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Редагувати профіль</title>
+  <title>Edit profile</title>
   <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body th:replace="layout :: layoutContent">
 
 <div th:fragment="content">
   <div class="glass-box">
-    <h2>Редагувати профіль</h2>
+    <h2>Edit profile</h2>
 
     <form th:action="@{/account/edit}" method="post">
       <div class="input-box">
-        <label>Телефон:<span class="required-star">*</span></label>
+        <label>Phone:<span class="required-star">*</span></label>
         <input type="text" name="phone" th:value="${user.phone}">
       </div>
 
       <div class="input-box">
-        <label>Адреса:<span class="required-star">*</span></label>
+        <label>Address:<span class="required-star">*</span></label>
         <input type="text" name="address" th:value="${user.address}">
       </div>
 
-      <button type="submit" class="btn">Зберегти</button>
+      <button type="submit" class="btn">Save</button>
     </form>
 
     <p style="text-align: center; margin-top: 20px;">
-      <a href="/account">← Назад до профілю</a>
+      <a href="/account"><- Back to profile</a>
     </p>
   </div>
 </div>

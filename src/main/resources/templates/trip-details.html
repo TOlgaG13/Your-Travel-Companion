@@ -2,55 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Деталі поїздки</title>
+  <title>Trip details</title>
   <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body th:replace="layout :: layoutContent">
 
 <div th:fragment="content">
   <div class="glass-box">
-    <h2>Деталі поїздки</h2>
+    <h2>Trip details</h2>
 
-    <p><strong>Пункт призначення:</strong> <span th:text="${trip.destination}"></span></p>
-    <p><strong>Дати:</strong> <span th:text="${trip.startDate}"></span> - <span th:text="${trip.endDate}"></span></p>
-    <p><strong>Опис:</strong> <span th:text="${trip.description}"></span></p>
+    <p><strong>Destination:</strong> <span th:text="${trip.destination}"></span></p>
+    <p><strong>Dates:</strong> <span th:text="${trip.startDate}"></span> - <span th:text="${trip.endDate}"></span></p>
+    <p><strong>Description:</strong> <span th:text="${trip.description}"></span></p>
 
     <!--Дії-->
     <div class="input-box" style="margin-top: 20px;">
       <div th:if="${joined and user.id != trip.user.id}">
         <form th:action="@{'/trips/' + ${trip.id} + '/leave'}" method="post">
-          <button class="btn" type="submit">Покинути поїздку</button>
+          <button class="btn" type="submit">Leave trip</button>
         </form>
       </div>
 
       <div th:if="${not joined}">
         <form th:action="@{'/trips/' + ${trip.id} + '/join'}" method="post">
-          <button class="btn" type="submit">Приєднатись до поїздки</button>
+          <button class="btn" type="submit">Join trip</button>
         </form>
       </div>
 
       <div th:if="${user != null and trip.user.id == user.id}" style="margin-top: 10px;">
         <form th:action="@{'/trips/' + ${trip.id} + '/delete'}" method="post">
-          <button class="btn delete" type="submit">Видалити поїздку</button>
+          <button class="btn delete" type="submit">Delete trip</button>
         </form>
       </div>
     </div>
 
     <!--  Список компаньйонів-->
-    <h3 style="margin-top: 30px;">Компаньйони</h3>
+    <h3 style="margin-top: 30px;">Companions</h3>
     <ul>
       <li th:each="companion : ${companions}" style="margin-bottom: 10px;">
         <span th:text="${companion.user.login}"></span>
         <form th:if="${user != null and trip.user.id == user.id and companion.user.id != user.id}"
               th:action="@{'/companions/' + ${companion.id} + '/remove'}"
               method="post" style="display:inline">
-          <button class="btn delete" type="submit">Видалити</button>
+          <button class="btn delete" type="submit">Delete</button>
         </form>
 
       </li>
     </ul>
 
-    <p style="margin-top: 30px;"><a href="/trips" class="btn">← Назад до Поїздки</a></p>
+    <p style="margin-top: 30px;"><a href="/trips" class="btn">← Back to trips</a></p>
   </div>
 </div>
 

@@ -134,7 +134,7 @@ private final CompanionService companionService;
         System.out.println("Leave request from userId=" + user.getId() + " for tripId=" + tripId);
 
         if (trip.getUser().getId() == user.getId()) {
-            System.out.println("Автор поїздки не може її покинути");
+            System.out.println("The author of the trip cannot leave it");
             return "redirect:/account";
         }
         companionService.leaveTrip(tripId, user.getId());

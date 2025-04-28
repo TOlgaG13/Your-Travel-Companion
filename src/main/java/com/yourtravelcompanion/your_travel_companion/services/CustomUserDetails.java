@@ -32,13 +32,13 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        System.out.println("Юсер заблокований: " + user.isBlocked());
+        System.out.println("User blocked: " + user.isBlocked());
         return !user.isBlocked();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        System.out.println("Перевірка якщо аккаунт заблокований: " + !user.isBlocked());
+        System.out.println("Check if the account is blocked: " + !user.isBlocked());
         return !user.isBlocked();
     }
 

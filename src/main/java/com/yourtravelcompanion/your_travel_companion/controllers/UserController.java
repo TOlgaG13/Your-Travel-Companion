@@ -66,7 +66,7 @@ public class UserController {
                                Model model) {
 
         if (userService.existByEmail(email)) {
-            model.addAttribute("error", "Email вже використовується!");
+            model.addAttribute("error", "Email is already in use!");
             return "register";
         }
 

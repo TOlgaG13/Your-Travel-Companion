@@ -73,9 +73,9 @@ public class CompanionService {
             //потім видаляється з репозиторію
             companionRepository.delete(companion);
 
-            System.out.println("Видаляємо клмпаньона : " + companion.getId());
+            System.out.println("Removing a companion : " + companion.getId());
         } else {
-            System.out.println("Команьона не знайдено");
+            System.out.println("Companion not found");
         }
     }
 

@@ -101,7 +101,7 @@ public class AuthHandler implements AuthenticationSuccessHandler {
                 admin.setActive(true);
 
                 userService.addUser(admin);
-                System.out.println("Адмін створений!");
+                System.out.println("Admin created!");
             }
         };
     }

@@ -3,28 +3,28 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
-  <title>Адмін-панель</title>
+  <title>Admin Panel</title>
   <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <div class="main-container">
 
   <div class="glass-box">
-    <h1>Адмін-панель</h1>
+    <h1>Admin Panel</h1>
   </div>
 
   <!-- Юсери -->
   <div class="glass-box">
-    <h2>Користувачі</h2>
+    <h2>Users</h2>
     <table>
       <thead>
       <tr>
         <th>ID</th>
-        <th>Логін</th>
-        <th>Пароль</th>
-        <th>Заблокований</th>
-        <th>Роль</th>
-        <th>Дії</th>
+        <th>Login</th>
+        <th>Password</th>
+        <th>Blocked</th>
+        <th>Role</th>
+        <th>Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -38,14 +38,14 @@
           <div th:if="${user.email != #authentication.name}" class="admin-actions">
             <form th:action="@{/admin/toggle}" method="post">
               <input type="hidden" name="userId" th:value="${user.id}" />
-              <button type="submit" class="btn" th:text="${user.blocked ? 'Розблокувати' : 'Заблокувати'}"></button>
+              <button type="submit" class="btn" th:text="${user.blocked ? 'Unblock' : 'Block'}"></button>
             </form>
             <form th:action="@{/admin/delete-user/{id}(id=${user.id})}" method="post">
-              <button type="submit" class="btn delete">Видалити</button>
+              <button type="submit" class="btn delete">Delete</button>
             </form>
           </div>
           <span th:if="${user.email == #authentication.name}" style="color: gray;">
-            Немає дій (це ви)
+            No action (it's you)
           </span>
         </td>
       </tr>
@@ -55,15 +55,15 @@
 
   <!-- Поїздки -->
   <div class="glass-box">
-    <h2>Поїздки</h2>
+    <h2>Trips</h2>
     <table>
       <thead>
       <tr>
         <th>ID</th>
-        <th>Назва</th>
-        <th>Опис</th>
-        <th>Автор</th>
-        <th>Дії</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Author</th>
+        <th>Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -74,7 +74,7 @@
         <td th:text="${trip.user.login}"></td>
         <td>
           <form th:action="@{/admin/delete-trip/{id}(id=${trip.id})}" method="post">
-            <button type="submit" class="btn delete">Видалити</button>
+            <button type="submit" class="btn delete">Delete</button>
           </form>
         </td>
       </tr>
@@ -84,7 +84,7 @@
 
   <div style="text-align: center; margin-top: 20px;">
     <a href="/logout" class="btn">Вийти</a>
-    <a href="/account" class="btn" style="margin-left: 10px;">← Назад до профілю</a>
+    <a href="/account" class="btn" style="margin-left: 10px;">← Back to profile</a>
   </div>
 
 </div>

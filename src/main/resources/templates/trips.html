@@ -2,22 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Поїздки</title>
+  <title>Trips</title>
   <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body th:replace="layout :: layoutContent">
 
 <div th:fragment="content">
   <div class="glass-box">
-    <h2>Доступні поїздки</h2>
+    <h2>Trips available</h2>
 
     <!-- Форма пошуку -->
     <form th:action="@{/trips/search}" method="get" class="input-box">
-      <input type="text" name="destination" placeholder="Пункт призначення">
-      <input type="text" name="country" placeholder="Країна">
+      <input type="text" name="destination" placeholder="Destination">
+      <input type="text" name="country" placeholder="Country">
       <input type="date" name="startDate">
       <input type="date" name="endDate">
-      <button class="btn" type="submit">Пошук</button>
+      <button class="btn" type="submit">Search</button>
     </form>
 
     <!-- Список поїздок -->
@@ -34,8 +34,8 @@
 
     <!-- Посилання -->
     <div class="links" style="text-align: center; margin-top: 20px;">
-      <a href="/trips/create" class="btn">+ Створити нову поїздку</a>
-      <a href="/account" class="btn" style="margin-left: 10px;">← Назад до профілю</a>
+      <a href="/trips/create" class="btn">+ Create a new trip</a>
+      <a href="/account" class="btn" style="margin-left: 10px;"><- Back to profile</a>
     </div>
   </div>
 </div>

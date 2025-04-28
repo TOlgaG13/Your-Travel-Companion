@@ -2,24 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Веріфікація</title>
+  <title>Verification</title>
   <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body th:replace="layout :: layoutContent">
 
 <div th:fragment="content">
   <div class="glass-box">
-    <h2>Введіть код</h2>
+    <h2>Enter the code</h2>
 
     <form th:action="@{/code}" method="post">
       <div class="input-box">
-        <label>Код:<span class="required-star">*</span></label>
+        <label>Code:<span class="required-star">*</span></label>
         <input type="text" name="inputCode" required>
       </div>
-      <button type="submit" class="btn">Підтвердити</button>
+      <button type="submit" class="btn">Confirm</button>
     </form>
 
-    <p th:if="${errorCode}" class="error">Помилка. Повторіть знову.</p>
+    <p th:if="${errorCode}" class="error">Error. Try again.</p>
   </div>
 </div>
 

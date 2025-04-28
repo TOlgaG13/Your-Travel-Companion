@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Логін</title>
+  <title>Login</title>
   <meta charset="UTF-8">
   <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
@@ -13,24 +13,24 @@
 
     <form th:action="@{/login}" method="post">
       <div class="input-box">
-        <label>Пошта: <span class="required-star">*</span></label>
+        <label>Email: <span class="required-star">*</span></label>
         <input type="email" name="username" required>
       </div>
       <div class="input-box">
-        <label>Пароль: <span class="required-star">*</span></label>
+        <label>Password: <span class="required-star">*</span></label>
         <input type="password" name="password" required>
       </div>
-      <button type="submit" class="btn">Вхід</button>
+      <button type="submit" class="btn">Sign in</button>
     </form>
 
-    <div th:if="${param.blocked}" class="error">Ваш акаунт заблоковано.</div>
-    <div th:if="${param.error}" class="error">Невірний логін або пароль.</div>
-    <div th:if="${param.logout}" class="success">Ви успішно вийшли з акаунту.</div>
+    <div th:if="${param.blocked}" class="error">Your account is blocked.</div>
+    <div th:if="${param.error}" class="error">Incorrect username or password.</div>
+    <div th:if="${param.logout}" class="success">You have successfully logged out.</div>
 
 
-    <p style="margin-top: 20px;"><a href="/register">Зареєструватись</a></p>
-    <p>Або увійти через:</p>
-    <a href="/oauth2/authorization/google" class="btn full-width">Увійти через Google</a>
+    <p style="margin-top: 20px;"><a href="/register">Sign Up</a></p>
+    <p>Or sign in with:</p>
+    <a href="/oauth2/authorization/google" class="btn full-width">Sign in with Google</a>
 
 
   </div>

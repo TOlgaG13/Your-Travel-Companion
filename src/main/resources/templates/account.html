@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
-  <title>Мій профіль</title>
+  <title>My profile</title>
   <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -11,16 +11,16 @@
   <div th:if="${message}" class="alert-success" th:text="${message}"></div>
 
   <div class="glass-box">
-    <h2>Мій профіль</h2>
-    <p><strong>Логін:</strong> <span th:text="${user.login}"></span></p>
-    <p><strong>Пошта:</strong> <span th:text="${user.email}"></span></p>
-    <p><strong>Телефон:</strong> <span th:text="${user.phone}"></span></p>
-    <p><strong>Адрес:</strong> <span th:text="${user.address}"></span></p>
-    <a href="/account/edit" class="btn">Редагувати профіль</a>
+    <h2>My profile</h2>
+    <p><strong>Login:</strong> <span th:text="${user.login}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+    <p><strong>Phone:</strong> <span th:text="${user.phone}"></span></p>
+    <p><strong>Address:</strong> <span th:text="${user.address}"></span></p>
+    <a href="/account/edit" class="btn">Edit profile</a>
   </div>
 
   <div class="glass-box">
-    <h3>Мої поїздки</h3>
+    <h3>My trips</h3>
     <ul>
       <li th:each="trip : ${createdTrips}">
         <strong th:text="${trip.destination}"></strong>
@@ -29,11 +29,11 @@
           <li th:each="companion : ${trip.companions}">
             <span th:text="${companion.user.login}"></span>
             <span th:if="${companion.user.id == user.id}">
-              – Ви приєдналися до цієї поїздки
+              – You have joined this trip.
 
             </span>
             <span th:if="${companion.user.id != user.id}">
-              – До вас приєднався новий компаньйон
+              – A new companion has joined your trip.
             </span>
           </li>
         </ul>
@@ -42,18 +42,18 @@
   </div>
 
   <div class="glass-box" sec:authorize="hasRole('ADMIN')" style="background: rgba(248, 234, 234, 0.85);">
-    <h3 style="color: darkred;">Розширені можливості адміністратора</h3>
-    <a href="/admin" class="btn">Перейти до адмін-панелі</a>
+    <h3 style="color: darkred;">Admin panel</h3>
+    <a href="/admin" class="btn">Open Admin Panel</a>
   </div>
 
   <div class="glass-box">
-    <h3>Поїздка до якої я приєднався</h3>
+    <h3>The trip I've joined</h3>
     <ul>
       <li th:each="trip : ${companionTrips}">
         <strong th:text="${trip.destination}"></strong>
         (<span th:text="${trip.startDate}"></span> - <span th:text="${trip.endDate}"></span>)
         <ul>
-          <li>Ви приєднались до цієї поїздки</li>
+          <li>You joined this trip.</li>
 
         </ul>
       </li>
@@ -61,8 +61,8 @@
   </div>
 
   <div style="text-align: center; margin-top: 20px;">
-    <a href="/trips" class="btn-nav">Знайти поїздку</a>
-    <a href="/logout" class="btn-nav">Вийти</a>
+    <a href="/trips" class="btn-nav">Find a trip</a>
+    <a href="/logout" class="btn-nav">Log out</a>
 
   </div>
 
