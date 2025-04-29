@@ -28,13 +28,14 @@ public class UserService {
 private final CompanionRepository companionRepository;
 private final TripRepository tripRepository;
 private final TripService tripService;
-
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, CompanionRepository companionRepository, TripRepository tripRepository, TripService tripService) {
+    private final EmailService emailService;
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, CompanionRepository companionRepository, TripRepository tripRepository, TripService tripService,EmailService emailService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.companionRepository = companionRepository;
         this.tripRepository = tripRepository;
         this.tripService = tripService;
+        this.emailService = emailService;
     }
 
     @Transactional(readOnly = true)
@@ -90,7 +91,6 @@ private final TripService tripService;
         CustomUser user = userRepository.findByEmail(email);
         if (user == null)
             return;
-
         user.setPhone(phone);
         user.setAddress(address);
         userRepository.save(user);
@@ -149,6 +149,42 @@ private final TripService tripService;
         user.setBlocked(!user.isBlocked());
 
         userRepository.save(user);
+    }
+    @Transactional
+    public void sendEmailChangeCode(String oldEmail, String newEmail) {
+        CustomUser user = userRepository.findByEmail(oldEmail);
+        if (user == null) {
+            return;
+        }
+
+        String code = generateVerificationCode();
+        user.setTempEmail(newEmail);
+        user.setVerificationCode(code);
+        userRepository.save(user);
+
+
+        emailService.sendMessage(newEmail, "Your confirmation code is: " + code);
+    }
+    @Transactional
+    public boolean confirmEmailChange(String currentEmail, String code) {
+        CustomUser user = userRepository.findByEmail(currentEmail);
+        if (user == null) {
+            return false;
+        }
+
+        if (user.getVerificationCode() != null && user.getVerificationCode().equals(code)) {
+            user.setEmail(user.getTempEmail());        // стар.на нов.
+            user.setTempEmail(null);                   // обнул.тимчасовий емаіл
+            user.setVerificationCode(null);
+            userRepository.save(user);
+            return true;
+        }
+
+        return false;
+    }
+    private String generateVerificationCode() {
+        int code = (int) (Math.random() * 9000) + 1000;
+        return String.valueOf(code);
     }
 
 }

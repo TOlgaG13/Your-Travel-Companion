@@ -5,13 +5,11 @@ import com.yourtravelcompanion.your_travel_companion.models.Trip;
 import com.yourtravelcompanion.your_travel_companion.models.UserRegisterType;
 import com.yourtravelcompanion.your_travel_companion.models.UserRole;
 import com.yourtravelcompanion.your_travel_companion.repositories.CompanionRepository;
-import com.yourtravelcompanion.your_travel_companion.services.CompanionService;
-import com.yourtravelcompanion.your_travel_companion.services.EmailService;
-import com.yourtravelcompanion.your_travel_companion.services.TripService;
-import com.yourtravelcompanion.your_travel_companion.services.UserService;
+import com.yourtravelcompanion.your_travel_companion.services.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 @Controller
@@ -172,6 +171,7 @@ public class UserController {
     }
 
 
+
     //доп. мет. для визначеня пот. кор.для зчит.емайлу
 
     private String getEmailFromPrincipal(Object principal) {
@@ -183,6 +183,58 @@ public class UserController {
         }
         throw new IllegalStateException("Unknown user type");
     }
+
+
+
+    @PostMapping("/account/change-email")
+    public String requestEmailChange(@AuthenticationPrincipal Object principal,
+                                     @RequestParam String newEmail,
+                                     Model model) {
+        String oldEmail = getEmailFromPrincipal(principal);
+        CustomUser user = userService.findByEmail(oldEmail)
+                .orElseThrow(() -> new IllegalStateException("User not found"));
+
+        if (user.getType() == UserRegisterType.GOOGLE) {
+            model.addAttribute("user", user);
+            model.addAttribute("error", "Email change is disabled for Google accounts.");
+            return "edit-account";
+        }
+
+        userService.sendEmailChangeCode(oldEmail, newEmail);
+        return "confirm-email-change";
+    }
+    @GetMapping("/account/confirm-email-change")
+    public String confirmEmailChangePage() {
+        return "confirm-email-change";
+    }
+    @PostMapping("/account/confirm-email-change")
+    public String confirmEmailChange(@AuthenticationPrincipal Object principal,
+                                     @RequestParam String code) {
+        String oldEmail = getEmailFromPrincipal(principal);
+
+        Optional<CustomUser> optionalUser = userService.findByEmail(oldEmail);
+        if (optionalUser.isEmpty()) {
+            return "redirect:/confirm-email-change?error";
+        }
+
+        CustomUser user = optionalUser.get();
+        boolean success = userService.confirmEmailChange(oldEmail, code);
+
+        if (success) {
+
+            CustomUserDetails updatedDetails = new CustomUserDetails(user);
+            Authentication newAuthentication = new UsernamePasswordAuthenticationToken(
+                    updatedDetails, null, updatedDetails.getAuthorities()
+            );
+            SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+
+            return "redirect:/account?emailChangedSuccess";
+        } else {
+            return "redirect:/confirm-email-change?error";
+        }
+    }
+
+
 
 }
 

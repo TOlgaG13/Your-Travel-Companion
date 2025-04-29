@@ -31,23 +31,26 @@ public class CustomUser {
  private LocalDateTime time;
  private boolean blocked;
 
+ private String tempEmail;
+ private String verificationCode;
+
  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
  private List<Trip> trips;
 
  public CustomUser() {
  }
 
- public CustomUser(String login, String password, UserRole role, UserRegisterType type, String email, String phone, String address) {
+ public CustomUser(String login, String password, UserRole role, String email, String phone, String address, UserRegisterType type, String tempEmail, String verificationCode) {
   this.login = login;
   this.password = password;
   this.role = role;
-  this.type = type;
   this.email = email;
   this.phone = phone;
   this.address = address;
-
+  this.type = type;
+  this.tempEmail = tempEmail;
+  this.verificationCode = verificationCode;
  }
-
 }
 
 
