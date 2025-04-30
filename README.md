@@ -1,73 +1,57 @@
-                                        Дипломний проект з курсу по Java.
+Final Diploma Project — Java Course
+"Your Travel Companion" is a web application designed to help users find travel companions.
+The system allows users to search for, create, or delete trips, as well as join or leave them.
+Users can also edit their profile information 
+(phone, address, and email – email change is available only for users registered via the form).
 
-"Your Travel Companion"-це веб застосунок,створений для пошуку компаньйона,для спільних подорожей.В ньому можно знайти
-або створити(видалити) поїздку,приєднатись(вийти) до них,також є можливість редагувати профіль(телефон/адрес).
-Є роль адміна з можливістю модерації.
+An admin role with moderation capabilities is available.
 
+User Roles and Permissions
+Regular User:
+-Register via email or Google;
+-Email confirmation required (check the Spam folder for the code);
+-Edit profile (address, phone number, email);
+-Create, view, search, and delete trips (only the author or admin can delete a trip);
+-Join or leave trips;
+-If you are the trip author, you can remove a companion from your trip.
 
-Ролі користувачів та їх можливості
-                                    Звичайний користувач:
--Реєстрація через email або Google; ![img_2.png](img_2.png)
--Підтвердження email через код (перевірити папку "Спам");
--Редагування профілю (адреса, телефон);
--Створення, перегляд, пошук та видалення поїздок(видалити поїздку може тільки її автор або адмін);
--Приєднання до поїздки або вихід із неї;
--Якщо Ви є автором поїздки то Ви маєте можливість видалити компаньйона.
-Тестовий користувач:(підтягнеться якщо додати dump.sql)
-Пошта:test@example.com
-Пароль:password
-                                        Адміністратор:
--Має всі права звичайного користувача та додатково має:
-                                    Адмін-панель з можливістю:
+Note: Only users registered through the form can change their email. Email changes require confirmation via code.
 
--Заблокувати/розблокувати користувача;
--Видалити користувача або поїздку;
--Неможливо видалити або заблокувати самого себе;
-Тестовий адмін:
-Пошта:admin@gmail.com
-Пароль:admin
+Admin:
+In addition to all regular user privileges, the admin has access to an Admin Panel with the ability to:
+-Block or unblock users;
+-Delete users or trips;
+-Cannot delete or block their own account.
 
+Test Admin Credentials:
+Email: admin@gmail.com
+Password: admin
 
-Структура БД:
--users — користувачі
--trips — поїздки
--companions — заявки на поїздки
--countries — список країн(додавався вручну через БД, доступні приклади в дампі)
+Database Structure:
+users — stores user information
+trips — stores trip data
+companions — stores trip join requests
+countries — list of available countries (manually populated via the database)
 
-Технології які тут використані:
-- Java 21
-- Spring Boot 3 (MVC, Security, Data JPA)
-- MySQL 8
-- Thymeleaf
-- OAuth2 (авторизація через Google)
-- HTML/CSS (без сторонніх фреймворків)
-- Maven
+Technologies Used:
+-Java 21
+-Spring Boot 3 (MVC, Security, Data JPA)
+-MySQL 8
+-Thymeleaf
+-OAuth2 (Google login)
+-HTML/CSS (no external frameworks)
+-Maven
 
-Повідомлення системи:
-Інформативні повідомлення:
--При невірному логіні або паролі;
--При спробі входу заблокованим користувачем — повідомлення "Ваш профіль заблоковано.";
--При успішному виході з акаунту;
--При невірному коді(підтвердження пошти);
+System Messages:
+-Informational feedback for users:
+-Invalid login or password;
+-Blocked account access attempt — "Your profile has been blocked."
+-Successful logout;
+-Incorrect email confirmation code.
 
-
-                                  Як запустити локально:
-- Клонувати репозиторій  (git clone https://github.com/TOlgaG13/your-travel-companion);
-- Імпортувати дамп БД (mysql -u root -p travelcompanion < travelcompanion_dump.sql);
-- Вставити свої дані у application.properties;
-- Запустити додаток;
-- Відкрити у браузері.
-
-
-P.S.
-У процесі розробки виникали труднощі з фронтендом та його взаємодією с бекендом.
-Також складнощі були з коректним налаштуванням SecurityConfig.
-В майбутньму ще треба буде зробити рефакторінг проекту.
-Але загалом що хотіла зробити,все зробила та картинка мені подобається:)
-
-У майбутньому хочу додати:
--завантаження аватара;
--розширене редагування профілю;
--чат між попутниками(або якийсь загальний між користувачами);
--можливість написання відгуків,рейтінг поїздок або користувачів.
- 
+Planned Features:
+-Uploading profile pictures (avatars);
+-Advanced profile editing;
+-Messaging/chat between travel companions (or globally between users);
+-User/trip reviews and rating system.
+It is also planned to refactor the project and add unit and integration tests.
