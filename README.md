@@ -21,8 +21,10 @@ An admin role with moderation capabilities is available.
 - Join or leave trips
 - If you are the trip author, you can remove companions from your trip
 
-Note: Only users registered through the form can change their email.  
-Email changes require confirmation via code.
+Note: 
+- Only users registered through the form can change their email.
+- You can only search for trips by country or city.
+- Email changes require confirmation via code.
 
 ### Admin:
 In addition to all regular user privileges, the admin can:
