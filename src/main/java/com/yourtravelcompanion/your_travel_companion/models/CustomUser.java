@@ -34,7 +34,7 @@ public class CustomUser {
  private String tempEmail;
  private String verificationCode;
 
- @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+ @OneToMany(mappedBy = "user")
  private List<Trip> trips;
 
  public CustomUser() {
